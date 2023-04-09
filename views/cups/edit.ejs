@@ -1,0 +1,36 @@
+<%- layout('layouts/boilerplate') %>
+
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1>Edit Coffee Shop:</h1>
+        </div>
+    
+    <form action="/cups" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label class="form-label" for="title" >Title:</label>
+            <input class="form-control"  type="text" id="title" name="cups[title]" placeholder="Title..." value="<%= foundCup.title %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="location" >location:</label>
+            <input class="form-control" type="text" id="location" name="cups[location]" placeholder="location..." value="<%= foundCup.location %>" required>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="src" >Image Url:</label>
+            <input class="form-control" type="text" id="src" name="cups[src]" placeholder="src..." value="<%= foundCup.src %>" required>
+        </div>
+        <div class="mb-3">
+        <label class="form-label" for="rating" >Coffee Shop Avg rating:</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">$</span>
+            <input type="number" max =5 class="form-control" placeholder="0.00" id="rating" name="cups[rating]" aria-label="rating" aria-describedby="basic-addon1" value="<%= foundCup.rating %>" required>
+          </div>
+        </div>
+        <button class="btn btn-info mb-3">Edit Coffee Shop</button>
+
+        <div>
+            <a href="/cups">Cancel</a>
+        </div>
+    </div>
+    </form>
