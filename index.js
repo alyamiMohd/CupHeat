@@ -106,6 +106,13 @@ app.post('/cups/:id/reviews',validateReview, async (req,res)=>{
 
 // that's an edit(git demo)
 
+app.delete('/cups/:id/reviews/:reviewId', async(req,res)=>{
+    const {id, reviewId} = req.params;
+    const cup = await Cup.findByIdAndUpdate(id, {$pull:{reviews:reviewId}})
+    await Review.findByIdAndDelete(reviewId)
+    res.redirect(`/cups/${id}`)
+})
+
 
 app.use((err,req,res,next)=>{
     console.log('oh boy')
