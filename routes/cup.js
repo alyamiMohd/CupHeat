@@ -25,8 +25,8 @@ router.get('/new',(req,res)=>{
 
 router.post('/', async(req,res)=> {
     const cup = new Cup(req.body.cups)
-    console.log(cup)
     await cup.save()
+    req.flash('success','You have successfully posted a form!')
     res.redirect(`/cups/${cup._id}`)
 })
 
