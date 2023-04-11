@@ -1,4 +1,6 @@
 <%- layout('layouts/boilerplate') %>
+<%- include('../partials/flash.ejs') %>
+
 <div class="row">
     <div class="col-6">
         <div class="card mb-5">
@@ -12,7 +14,7 @@
               <li class="list-group-item"><%= foundCup.rating %>/5 Stars!</li>
             </ul>
             <div class="card-body">
-                <a href="/cups/<%= foundCup.id %>/edit" class="card-link btn btn-info">Edit!</a>
+                <a href="/cups/<%=foundCup.id%>/edit" class="card-link btn btn-info">Edit!</a>
                 <form class="d-inline" action="/cups/<%= foundCup.id %>?_method=DELETE" method="post">
                     <button class="btn btn-danger">Delete</button>
                 </form>
@@ -40,7 +42,7 @@
             <div class="card-body">
               <h5 class="card-title">Rating: <%= review.rating %></h5>
               <p class="card-text">Review:<%= review.body %></p>
-              <form action="/cups/<%=foundCup.id%>/reviews/<%=review._id %>?_method=DELETE" method='post'>
+              <form action="/cups/<%=foundCup.id%>/reviews/<%=review._id%>?_method=DELETE" method='post'>
               <button class="btn btn-sm btn-danger">Delete</button>
             </form>
       </div>
