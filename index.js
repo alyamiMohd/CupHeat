@@ -63,7 +63,6 @@ app.get('/cups/new',(req,res)=>{
 
 app.post('/cups', async(req,res)=> {
     const cup = new Cup(req.body.cups)
-    console.log(cup)
     await cup.save()
     res.redirect(`/cups/${cup._id}`)
 })
