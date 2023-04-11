@@ -28,11 +28,14 @@ cookie:{
     maxAge:1000*60*60*24*7
 }
 }))
+
 app.use(flash())
 app.use((req,res,next)=>{
     res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
     next()
 })
+
 app.use(express.static(path.join(__dirname,'public')))
 app.set(path.join(__dirname,'/views'))
 app.set('view engine','ejs')
@@ -41,7 +44,6 @@ app.use('/cups/:id/reviews', reviewsRoute)
 app.engine('ejs',ejsMate)
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended:true}))
-// app.use(morgan('tiny'))
 app.get('/', (req,res) =>{
     res.render('home')
 })

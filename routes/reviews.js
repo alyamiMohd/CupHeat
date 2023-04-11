@@ -22,6 +22,7 @@ router.post('/',validateReview, async (req,res)=>{
     cup.reviews.push(reviews)
     await reviews.save()
     await cup.save()
+    req.flash('success','Created new Review!')
     res.redirect(`/cups/${cup._id}`)
 })
 
@@ -30,6 +31,7 @@ router.delete('/:reviewId', async(req,res)=>{
     const {id, reviewId} = req.params;
     const cup = await Cup.findByIdAndUpdate(id, {$pull:{reviews:reviewId}})
     await Review.findByIdAndDelete(reviewId)
+    req.flash('success','Successfully deleted the Review!')
     res.redirect(`/cups/${id}`)
 })
 

@@ -1,5 +1,4 @@
 <%- layout('layouts/boilerplate') %>
-<%- include('../partials/flash.ejs') %>
 
 <div class="row">
     <div class="col-6">
@@ -15,7 +14,7 @@
             </ul>
             <div class="card-body">
                 <a href="/cups/<%=foundCup.id%>/edit" class="card-link btn btn-info">Edit!</a>
-                <form class="d-inline" action="/cups/<%=foundCup.id%>?_method=DELETE" method="post">
+                <form class="d-inline" action="/cups/<%= foundCup.id %>?_method=DELETE" method="post">
                     <button class="btn btn-danger">Delete</button>
                 </form>
             </div>
