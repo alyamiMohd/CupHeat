@@ -46,69 +46,6 @@ app.get('/', (req,res) =>{
     res.render('home')
 })
 
-app.get('/cups', async(req,res)=> {
-    const cups = await Cup.find({});
-    res.render('cups/index',{cups})
-})
-
-
-app.get('/cups/new',(req,res)=>{
-    res.render('cups/new')
-})
-
-
-app.post('/cups', async(req,res)=> {
-    const cup = new Cup(req.body.cups)
-    await cup.save()
-    res.redirect(`/cups/${cup._id}`)
-})
-
-
-app.get('/cups/:id/edit', async(req,res)=> {
-    const {id} = req.params;
-    const foundCup = await Cup.findById(id);
-    res.render('cups/edit',{foundCup})
-})
-
-app.patch('/cups/:id', async(req,res)=> {
-    const {id} = req.params;
-    const foundCup = await Cup.findByIdAndUpdate(id,req.body.cups);
-    res.redirect(`/cups/${id}`)
-})
- 
-
-app.get('/cups/:id', async(req,res)=> {
-    const {id} = req.params;
-    const foundCup = await Cup.findById(id).populate('reviews');
-    res.render('cups/show',{foundCup})
-})
-
-
-app.delete('/cups/:id', async (req,res)=>{
-    await Cup.findByIdAndDelete(req.params.id);
-    res.redirect('/cups')
-})
-
-
-app.post('/cups/:id/reviews',validateReview, async (req,res)=>{
-    const cup = await Cup.findById(req.params.id)
-    const reviews = await new Review(req.body.review)
-    cup.reviews.push(reviews)
-    await reviews.save()
-    await cup.save()
-    res.redirect(`/cups/${cup._id}`)
-})
-
-// that's an edit(git demo)
-
-app.delete('/cups/:id/reviews/:reviewId', async(req,res)=>{
-    const {id, reviewId} = req.params;
-    const cup = await Cup.findByIdAndUpdate(id, {$pull:{reviews:reviewId}})
-    await Review.findByIdAndDelete(reviewId)
-    res.redirect(`/cups/${id}`)
-})
-
-
 app.use((err,req,res,next)=>{
     console.log('oh boy')
     console.log(err)
