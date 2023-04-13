@@ -11,6 +11,9 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 
+//suppressing mongoose error
+mongoose.set('strictQuery', false);
+
 
 // Database
 mongoose.connect('mongodb://127.0.0.1:27017/FindMyCup',{
@@ -29,6 +32,12 @@ const reviewsRoute = require('./routes/reviews.js')
 const usersRoute = require('./routes/users')
 
 
+// passport auth
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
+
+
 
 //Use methods 
 app.use(session({secret:'topNotchSecret', saveUninitialized:true, resave:false,
@@ -43,6 +52,8 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use((req,res,next)=>{
+    console.log(req.session)
+    res.locals.currUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next()
@@ -52,14 +63,7 @@ app.use('/',usersRoute)
 app.use('/cups',cupRoute)
 app.use('/cups/:id/reviews', reviewsRoute)
 app.use(methodOverride('_method'))
-app.use(express.urlencoded({extended:true}))
 
-
-
-// passport auth
-passport.use(new LocalStrategy(User.authenticate()))
-passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
 
 
 // app set ejs and its engine

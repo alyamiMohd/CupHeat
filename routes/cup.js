@@ -1,6 +1,7 @@
 const express = require('express')
 const router = express.Router()
 const Cup = require('../models/findMyCup.js')
+const {isLoggedIn} = require('../middleware.js')
 const {cupSchema} = require('../schemas.js')
 // const catchAsync = require('./utils/catchAsync.js')
 const methodOverride = require('method-override')
@@ -23,12 +24,12 @@ router.get('/', async(req,res)=> {
 })
 
 
-router.get('/new',(req,res)=>{
-    res.render('cups/new')
+router.get('/new', isLoggedIn, (req,res)=>{
+        res.render('cups/new')
 })
 
 
-router.post('/', async(req,res)=> {
+router.post('/', isLoggedIn,async(req,res)=> {
     const cup = new Cup(req.body.cups)
     await cup.save()
     req.flash('success','Successfully Posted!')
@@ -36,13 +37,13 @@ router.post('/', async(req,res)=> {
 })
 
 
-router.get('/:id/edit', async(req,res)=> {
+router.get('/:id/edit',isLoggedIn, async(req,res)=> {
     const {id} = req.params;
     const foundCup = await Cup.findById(id);
     res.render('cups/edit',{foundCup})
 })
 
-router.patch('/:id',async(req,res)=> {
+router.patch('/:id',isLoggedIn,async(req,res)=> {
     const {id} = req.params;
     const foundCup = await Cup.findByIdAndUpdate(id,req.body.cups);
     if (!foundCup){
