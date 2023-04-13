@@ -10,6 +10,7 @@ const path = require('path');
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
+const middleware = require('./middleware')
 
 //suppressing mongoose error
 mongoose.set('strictQuery', false);
