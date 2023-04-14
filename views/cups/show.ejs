@@ -26,29 +26,34 @@
           </div>
         </div>
         <div class="col-6">
-        <h2>Leave a Review!</h2>
-        <form action="/cups/<%=foundCup.id%>/reviews" method="post" class="needs-validation mb-3" novalidate>
-        <div class="mb-3">
-          <label for="rating" class="form-label" name="rating">Rating</label>
-          <input type="range" id='rating 'name="review[rating]" class="form-range" max="5" min="1">
-        </div>
-        <div class="mb-3">
-          <label class ="form-label" for="body">Review</label>
-          <textarea class ="form-control" name="review[body]" id="body" cols="30" rows="4" required></textarea>
-          <div class="invalid-feedback">How dumb are you man?</div>
-        </div>
-        <button>Submit</button>
-        </form>
-      <div class="mb-3">
+          <% if (currUser) { %>
+            <h2>Leave a Review!</h2>
+            <form action="/cups/<%=foundCup.id%>/reviews" method="post" class="needs-validation mb-3" novalidate>
+            <div class="mb-3">
+              <label for="rating" class="form-label" name="rating">Rating</label>
+              <input type="range" id='rating 'name="review[rating]" class="form-range" max="5" min="1">
+            </div>
+            <div class="mb-3">
+              <label class ="form-label" for="body">Review</label>
+              <textarea class ="form-control" name="review[body]" id="body" cols="30" rows="4" required></textarea>
+              <div class="invalid-feedback">How dumb are you man?</div>
+            </div>
+            <button>Submit</button>
+            </form>
+          <div class="mb-3">
+          <% } %>
         <h2>Ratings</h2>
         <% for (let review of foundCup.reviews) {%>
           <div class="card mb-3">
             <div class="card-body">
               <h5 class="card-title">Rating: <%= review.rating %></h5>
+              <h6 class="card-subtitle mb-2 text-muted">By <%= review.author.username %></h6>
               <p class="card-text">Review:<%= review.body %></p>
-              <form action="/cups/<%=foundCup.id%>/reviews/<%=review._id%>?_method=DELETE" method='post'>
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </form>
+              <% if (currUser && review.author.equals(currUser._id)) { %>
+                <form action="/cups/<%=foundCup.id%>/reviews/<%=review._id%>?_method=DELETE" method='post'>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+              <% } %>
         </div>
         </div>
         <% } %>
