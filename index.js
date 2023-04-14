@@ -27,6 +27,7 @@ db.once("open", () => {
 
 
 
+
 // Routes
 const cupRoute = require('./routes/cup.js')
 const reviewsRoute = require('./routes/reviews.js')
@@ -53,7 +54,6 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 app.use((req,res,next)=>{
-    console.log(req.session)
     res.locals.currUser = req.user;
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
