@@ -22,7 +22,16 @@ const seedDB = async() => {
         const cup = new Cup ({
             title:`${sample(discriptors)} ${sample(cupProviders)}`,
             location:`${cities[random22].city}`,
-            src:'https://source.unsplash.com/collection/1528792',
+            src: [
+                {
+                  url: 'https://res.cloudinary.com/dztowvrak/image/upload/v1681539368/CupHeat/qro4ocqzskfqhw777zjk.jpg',
+                  filename: 'CupHeat/qro4ocqzskfqhw777zjk',
+                },
+                {
+                  url: 'https://res.cloudinary.com/dztowvrak/image/upload/v1681539368/CupHeat/tlttk5wjbd9b6x01dgzf.jpg',
+                  filename: 'CupHeat/tlttk5wjbd9b6x01dgzf',
+                }
+              ],
             rating:price,
             author:'6436c35c246cdb9662249949',
             description:'Lorem blanditiis tenetur fugit vitae! Ut, ad reprehenderit reiciendis voluptatem nemo enim dolores.'

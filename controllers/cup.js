@@ -12,8 +12,10 @@ module.exports.renderNewForm = (req,res)=>{
 
 module.exports.createForm = async(req,res)=> {
     const cup = new Cup(req.body.cups)
+    cup.src = req.files.map(f=>({url:f.path,filename:f.filename}))
     cup.author = req.user._id;
     await cup.save()
+    console.log(cup)
     req.flash('success','Successfully Posted!')
     res.redirect(`/cups/${cup._id}`)
 }
@@ -33,6 +35,9 @@ module.exports.editForm = async(req,res)=> {
         res.redirect('/cups')
     }
     const foundCup = await Cup.findByIdAndUpdate(id,req.body.cups);
+    const imgs = req.files.map(f=> ({url: f.path, filename:f.filename}));
+    foundCup.src.push(...imgs)
+    await foundCup.save()
     req.flash('success','Successfully Edited!')
     res.redirect(`/cups/${foundCup._id}`)
 }

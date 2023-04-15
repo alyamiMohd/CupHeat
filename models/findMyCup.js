@@ -6,7 +6,12 @@ const Review = require('./review')
 const FindMyCup = new Schema({
     title:String,
     rating:Number,
-    src:String,
+    src: [
+        {
+            url:String,
+            filename:String
+        }
+    ] ,
     description:String,
     location:String,
     author: {
