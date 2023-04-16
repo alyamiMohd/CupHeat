@@ -12,13 +12,14 @@ router.use(methodOverride('_method'))
 const multer = require('multer')
 const {storage} = require('../cloudinary/index.js')
 const upload = multer({storage})
+const formValidation = require('../public/js/formValidation.js')
 
 
 // router.use(express.urlencoded({extended:true}))
 
 router.route('/')
     .get(cups.index)
-    .post(isLoggedIn,upload.array('image') ,cups.createForm)
+    .post(isLoggedIn,upload.array('image'),cups.createForm)
 
 router.get('/new', isLoggedIn, cups.renderNewForm)
 

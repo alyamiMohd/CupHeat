@@ -1,5 +1,8 @@
 const Cup = require('../models/findMyCup.js')
-
+const {cloudinary} = require('../cloudinary')
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding')
+const mapBoxToken = process.env.MAPBOX_TOKEN
+const geocoder = mbxGeocoding({accessToken:mapBoxToken})
 
 module.exports.index = async(req,res)=> {
     const cups = await Cup.find({});
@@ -11,11 +14,16 @@ module.exports.renderNewForm = (req,res)=>{
 }
 
 module.exports.createForm = async(req,res)=> {
+    const geoData = await geocoder.forwardGeocode({
+        query:req.body.cups.location,
+        limit:1
+    }).send()
     const cup = new Cup(req.body.cups)
+    cup.geometry = geoData.body.features[0].geometry;
     cup.src = req.files.map(f=>({url:f.path,filename:f.filename}))
     cup.author = req.user._id;
-    await cup.save()
     console.log(cup)
+    await cup.save()
     req.flash('success','Successfully Posted!')
     res.redirect(`/cups/${cup._id}`)
 }
@@ -38,6 +46,12 @@ module.exports.editForm = async(req,res)=> {
     const imgs = req.files.map(f=> ({url: f.path, filename:f.filename}));
     foundCup.src.push(...imgs)
     await foundCup.save()
+    if(req.body.deleteImages){
+        for(let filename of req.body.deleteImages){
+            await cloudinary.uploader.destroy(filename)
+        }
+        await cup.updateOne({$pull:{src:{filename: {$in: req.body.deleteImages}}}})
+    }
     req.flash('success','Successfully Edited!')
     res.redirect(`/cups/${foundCup._id}`)
 }
