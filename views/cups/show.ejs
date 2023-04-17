@@ -1,7 +1,10 @@
 <%- layout('layouts/boilerplate') %>
 <link rel="stylesheet" href="/css/stars.css">
 
+
+
 <div class="row">
+  <div id="map" style="width:400px;height:300px;"></div>
     <div class="col-6">
       <div id="cupCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -22,8 +25,10 @@
       </button>
       <% } %>
     </div>
+    
         <div class="card mb-5">
             <div class="card-body">
+              
               <h5 class="card-title"><%= foundCup.title %></h5>
               <p class="card-text"><%= foundCup.description %></p>
             </div>
@@ -93,3 +98,10 @@
     </div>
 
 </div>
+
+<script>
+  const mapToken ='<%-process.env.MAPBOX_TOKEN%>'
+  const cup =<%- JSON.stringify(foundCup.geometry.coordinates)%>
+</script>
+<script src="/js/showPageMap.js">
+</script>
