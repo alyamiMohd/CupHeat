@@ -13,16 +13,20 @@ db.once("open", () => {
     console.log("Database connected!")
 })
 
+
 const price = Math.floor(Math.random()*5)+1;
 const sample = array => array[Math.floor(Math.random()*array.length)];
 const seedDB = async() => {
     await Cup.deleteMany({})
     for (let i =0; i<50; i++) {
-        let random22 =  Math.floor(Math.random()*22);
-        const cup = new Cup ({
+            let randomLocation =  Math.floor(Math.random()*22);
+            let locationLat = `${cities[randomLocation].lat}`
+            let locationLng = `${cities[randomLocation].lng}`
+            let locationCity = `${cities[randomLocation].city}`
+            const cup = new Cup ({
             title:`${sample(discriptors)} ${sample(cupProviders)}`,
-            location:`${cities[random22].city}`,
-            geometry:{ type: 'Point', coordinates: [ 46.716667, 24.633333 ] },
+            location:locationCity,
+            geometry:{ type: 'Point', coordinates: [locationLng,locationLat] },
             src: [
                 {
                   url:'https://res.cloudinary.com/dztowvrak/image/upload/v1681539368/CupHeat/tlttk5wjbd9b6x01dgzf.jpg',
