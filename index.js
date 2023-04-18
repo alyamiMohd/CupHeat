@@ -15,12 +15,13 @@ const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize')
+const MongoStore = require("connect-mongo");
 
-
+// const dbUrl = process.env.DB_URL
 //suppressing mongoose error
 mongoose.set('strictQuery', false);
-
-
+const dbUrl = 'mongodb://127.0.0.1:27017/FindMyCup'
+// mongodb://127.0.0.1:27017/FindMyCup
 // Database
 mongoose.connect('mongodb://127.0.0.1:27017/FindMyCup',{
     useNewUrlParser:true});
@@ -52,7 +53,8 @@ cookie:{
     name:'session',
     httpOnly:true,
     expires: Date.now() + 1000*60*60*24*7,
-    maxAge:1000*60*60*24*7
+    maxAge:1000*60*60*24*7,
+    store: MongoStore.create({mongoUrl:dbUrl, secret:'thisisasecret',touchAfter:24*3600})
 }
 }))
 app.use(express.urlencoded({extended:true}))
