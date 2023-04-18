@@ -4,9 +4,42 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FindMyCup</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css"
+        integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/home.css">
+    <title>Cup Heat...</title>
 </head>
-<body>
-    <h1>Main page!</h1>
+<body class="d-flex text-center text-white bg-dark">
+    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+        <header class="mb-auto">
+            <div>
+                <h3 class="float-md-left mb-0">Cup Heat</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-right">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="/cups">Heat Map</a>
+                    <% if (!currUser) { %>
+                        <a class="nav-link" href="/login">Login</a>
+                        <a class="nav-link" href="/register">Register</a>
+                    <% } else{ %>
+                    <a class="nav-link" href="/logout">Logout</a>
+                    <% } %>
+                </nav>
+            </div>
+        </header>
+
+        <main class="px-3">
+            <h1>Cup Heat</h1>
+            <p class="lead">Jump Right in and explore all the Coffee Shops <br>
+                            That's closest to you!</p>
+            <a href="/cups" class="btn btn-lg btn-secondary font-weight-bold bg-white">View Providers</a>
+        </main>
+
+        <footer class="mt-auto text-white-50">
+            <p> &copy; Cup Heat 2023</p>
+        </footer>
+    
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
 </body>
 </html>

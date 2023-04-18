@@ -3,28 +3,33 @@
 
     <h1>Your Favorite Coffee Sellers:</h1>
     <ul>
-        <% for(let c of cups){  %>
-            <div class="card">
+
+        <% for (let c of cups){%>
+            <div class="card mb-3" >
                 <div class="row">
                     <div class="col-md-4">
-                        <div class="card" style="width: 18rem;">
-                            <% if (c.src.length) { %>
-                                <img src="<%=c.src[0].url%>" class="card-img-top" alt="...">
-                            <% } else{%> 
-                            <img src="https://res.cloudinary.com/dztowvrak/image/upload/v1681539368/CupHeat/tlttk5wjbd9b6x01dgzf.jpg" class="card-img-top" alt="...">
-                            <%}%>
-                            <div class="card-body">
-                              <h5 class="card-title"> <%= c.title %> </h5>
-                              <small class="text-muted"><%= c.location %></small>
-                              <p class="card-text"><%= c.description %></p>
-                              <a href="/cups/<%= c._id %>" class="btn btn-primary">View <%= c.title %></a>
-                            </div>
-                          </div>
+                        <%if(c.src.length) {%>
+                        <img class="img-fluid" alt="" src="<%=c.src[0].url%>">
+                        <% }else {%>
+                        <img class="img-fluid" alt=""
+                            src="https://res.cloudinary.com/douqbebwk/image/upload/v1600103881/YelpCamp/lz8jjv2gyynjil7lswf4.png">
+                        <% } %>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h5 class="card-title"><%= c.title %> </h5>
+            
+                            <p class="card-text"><%= c.description %></p>
+                            <p class="card-text">
+                                <small class="text-muted"><%= c.location%></small>
+                            </p>
+                            <a class="btn btn-primary" href="/cups/<%=c._id%>">View <%=c.title%></a>
+                        </div>
                     </div>
                 </div>
             </div>
-            <% } %>
-    </ul>
+            <% }%>
+            </div>
 
 
     <script>

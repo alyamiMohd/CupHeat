@@ -11,6 +11,8 @@ imageSchema.virtual('thumbnail').get(function(){
     return this.url.replace('/upload','/upload/w_200')
 })
 
+const opts = {toJSON:{virtuals:true} };
+
 const FindMyCup = new Schema({
     title:String,
     geometry:{
@@ -38,8 +40,13 @@ const FindMyCup = new Schema({
         ref:'Review'
         }
     ]
-})
+}, opts)
 
+
+
+FindMyCup.virtual('properties.popUpMarkup').get(function(){
+    return `<strong> <a href='/cups/${this._id}'>${this.title}</a> </strong>`
+})
 
 FindMyCup.post('findOneAndDelete',async function(doc){
     if(doc){

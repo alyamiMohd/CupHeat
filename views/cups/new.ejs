@@ -1,48 +1,51 @@
 <%- layout('layouts/boilerplate') %> 
     <div class="row">
-        <div class="col-6 offset-3">
+        <div class="col-md-6 offset-md-3">
             <h1>New Coffee Shop:</h1>
         </div>
-    
-    <form action="/cups" method="POST" class='needs-validation' enctype="multipart/form-data" novalidate>
-        <div class="mb-3">
-            <label class="form-label" for="title" >Title:</label>
-            <input class="form-control"  type="text" id="title" name="cups[title]" placeholder="Title..."  required>
-            <div class="valid-feedback">
-                <small>oh nice you are not an idiot</small>
-            </div>
-        </div>
 
-        <div class="mb-3">
-            <label class="form-label" for="location" >location:</label>
-            <input class="form-control" type="text" id="location" name="cups[location]" placeholder="location..." required>
-        </div>
-<!-- 
-        <div class="custom-file mb-3">
-            <input type="file" class="custom-file-input" id="customFile" name="image" multiple>
-            <label class="custom-file-label" for="customFile">Choose file</label>
-          </div> -->
+            <form action="/cups" method="POST" class='needs-validation' enctype="multipart/form-data" novalidate>
+                <div class="mb-3">
+                    <label class="form-label" for="title" >Title:</label>
+                    <input class="form-control"  type="text" id="title" name="cups[title]" placeholder="Title..."  required>
+                    <div class="valid-feedback">
+                        <small>oh nice you are not an idiot</small>
+                    </div>
+                </div>
+        
+                <div class="mb-3">
+                    <label class="form-label" for="location" >location:</label>
+                    <input class="form-control" type="text" id="location" name="cups[location]" placeholder="location..." required>
+                </div>
+        <!-- 
+                <div class="custom-file mb-3">
+                    <input type="file" class="custom-file-input" id="customFile" name="image" multiple>
+                    <label class="custom-file-label" for="customFile">Choose file</label>
+                  </div> -->
+        
+        
+                <div class="mb-3">
+                <label class="form-label" for="rating" >Coffee Shop Avg rating:</label>
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="basic-addon1">$</span>
+                    <input type="number" class="form-control" placeholder="0.00" id="rating" name="cups[rating]" aria-label="rating" aria-describedby="basic-addon1" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                    <div class="input-group mb-3 custom-file">
+                      <input type="file" class="form-control custom-file" id="inputGroupFile02" name="image" multiple>
+                      <label class="custom-file-label" for="inputGroupFile02"></label>
+                    </div>
+                  </div>
+                <button class="btn btn-primary mb-3">Add Coffee Shop</button>
+        
+                <div>
+                    <a href="/cups">Cancel</a>
+                </div>
 
+            </form>
 
-        <div class="mb-3">
-        <label class="form-label" for="rating" >Coffee Shop Avg rating:</label>
-        <div class="input-group mb-3">
-            <span class="input-group-text" id="basic-addon1">$</span>
-            <input type="number" class="form-control" placeholder="0.00" id="rating" name="cups[rating]" aria-label="rating" aria-describedby="basic-addon1" required>
-          </div>
-        </div>
-        <div class="mb-3">
-            <div class="input-group mb-3 custom-file">
-              <input type="file" class="form-control custom-file" id="inputGroupFile02" name="image" multiple>
-              <label class="custom-file-label" for="inputGroupFile02"></label>
-            </div>
-          </div>
-        <button class="btn btn-primary mb-3">Add Coffee Shop</button>
-
-        <div>
-            <a href="/cups">Cancel</a>
-        </div>
     </div>
-    </form>
+    
 
 

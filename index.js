@@ -14,6 +14,7 @@ const path = require('path');
 const passport = require('passport')
 const LocalStrategy = require('passport-local')
 const User = require('./models/user')
+const mongoSanitize = require('express-mongo-sanitize')
 
 
 //suppressing mongoose error
@@ -48,6 +49,7 @@ passport.deserializeUser(User.deserializeUser())
 //Use methods 
 app.use(session({secret:'topNotchSecret', saveUninitialized:true, resave:false,
 cookie:{
+    name:'session',
     httpOnly:true,
     expires: Date.now() + 1000*60*60*24*7,
     maxAge:1000*60*60*24*7
@@ -68,6 +70,7 @@ app.use('/',usersRoute)
 app.use('/cups',cupRoute)
 app.use('/cups/:id/reviews', reviewsRoute)
 app.use(methodOverride('_method'))
+app.use(mongoSanitize());
 
 
 
