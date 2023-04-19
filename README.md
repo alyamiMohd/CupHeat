@@ -28,3 +28,4 @@ FrontEnd:
 
 And, I also used (Mapbox "cluster map & minimap), Cloudinary (Image Storage) API's
 <h2> Concepts learned from this course: </h2>
+![plot]("C:\Users\aa\Documents\CupHeat\lastthing.png")
