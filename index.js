@@ -88,7 +88,10 @@ app.get('/', (req,res) =>{
     res.render('home')
 })
 
+
+//heroku's default
+const port = process.env.PORT || 3000
 // Server listening
-app.listen(3000,(req,res)=> {
-    console.log('Listening on port 3000!')
+app.listen(port,(req,res)=> {
+    console.log(`Listening on port ${port}`)
 })
