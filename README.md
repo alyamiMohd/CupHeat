@@ -5,5 +5,26 @@ You can check out CupHeat on following link :https://secure-stream-91356.herokua
 <h1> Tech Stack </h1>
 Backend:
 <ul>
+  
   <li>Node</li>
+  <li>Express</li>
+  <li>MongoDB Atlas</li>
+  <li>Mongoose</li>
+  <li>Passport (authentication)</li>
+  <li>Joi (validation)</li>
+  <li>Helmet (security on HTTP requests)</li>
 </ul>
+
+FrontEnd:
+<ul>
+  
+  <li>EJS</li>
+  <li>HTML</li>
+  <li>CSS Atlas</li>
+  <li>Mongoose</li>
+  <li>Bootstrap 5</li>
+
+</ul>
+
+And, I also used (Mapbox "cluster map & minimap), Cloudinary (Image Storage) API's
+<h2> Concepts learned from this course: </h2>
