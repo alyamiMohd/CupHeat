@@ -16,14 +16,15 @@ const LocalStrategy = require('passport-local')
 const User = require('./models/user')
 const mongoSanitize = require('express-mongo-sanitize')
 const MongoStore = require("connect-mongo");
+const secret = process.env.SECRET || 'thisisasecret'
 
-// const dbUrl = process.env.DB_URL
+
+const dbUrl = process.env.DB_URL || 'mongodb://127.0.0.1:27017/FindMyCup'
 //suppressing mongoose error
 mongoose.set('strictQuery', false);
-const dbUrl = 'mongodb://127.0.0.1:27017/FindMyCup'
 // mongodb://127.0.0.1:27017/FindMyCup
 // Database
-mongoose.connect('mongodb://127.0.0.1:27017/FindMyCup',{
+mongoose.connect(dbUrl,{
     useNewUrlParser:true});
 const db = mongoose.connection;
 db.on("error", console.error.bind(console,"connection error:"));
@@ -48,13 +49,13 @@ passport.deserializeUser(User.deserializeUser())
 
 
 //Use methods 
-app.use(session({secret:'topNotchSecret', saveUninitialized:true, resave:false,
+app.use(session({secret, saveUninitialized:true, resave:false,
 cookie:{
     name:'session',
     httpOnly:true,
     expires: Date.now() + 1000*60*60*24*7,
     maxAge:1000*60*60*24*7,
-    store: MongoStore.create({mongoUrl:dbUrl, secret:'thisisasecret',touchAfter:24*3600})
+    store: MongoStore.create({mongoUrl:dbUrl, secret,touchAfter:24*3600})
 }
 }))
 app.use(express.urlencoded({extended:true}))
