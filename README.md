@@ -27,7 +27,8 @@ FrontEnd:
 </ul>
 
 And, I also used (Mapbox "cluster map & minimap), Cloudinary (Image Storage) API's
-<h2> Concepts learned from this course: </h2>
+<h2> Concepts learned from this course:</h2>
+
 ![lastthing](https://user-images.githubusercontent.com/130024303/233155687-7e40c949-9481-4db7-8a81-c6073f513dc0.png)
 
 
